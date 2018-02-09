@@ -9,12 +9,22 @@ import { StudentsService } from '../students.service';
 export class StudentsComponent implements OnInit {
   // instantiate students to an empty array
   students: any = [];
+  student: any = {
+    name: "",
+    year: ""
+  };
 
   constructor(private studentsService: StudentsService) { }
 
   ngOnInit() {
     // retrieve students from the api
     this.studentsService.getAllStudents().subscribe(students => {
+      this.students = students;
+    });
+  }
+
+  postStudent(student) {
+    this.studentsService.createStudent(student).subscribe(students => {
       this.students = students;
     });
   }

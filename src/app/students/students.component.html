@@ -8,3 +8,20 @@
     </div>
   </div>
 </div>
+
+
+<div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+
+                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" [(ngModel)]="this.student.name" name = "name">
+                        <input type = "text" class = "form-control input-lg text-center" [(ngModel)] = "this.student.year" name = "year">
+                    </div>
+
+                    <!-- createToDo() WILL CREATE NEW TODOS -->
+                    <button type="submit" class="btn btn-primary btn-lg" (click)="postStudent(this.student)">Add</button>
+                </form>
+            </div>
+        </div>

@@ -21,4 +21,22 @@ router.get('/api/students', (req, res) => {
   });
 });
 
+router.post('/api/students', (req, res) => {
+  Student.create({
+    name: req.body.name,
+    year: req.body.year,
+    done: false
+  }, (err, student) => {
+    if (err)
+      res.send(err);
+
+    Student.find((err, students) => {
+      if (err)
+        res.send(err);
+
+      res.json(Students);
+    });
+  });
+});
+
 module.exports = router;

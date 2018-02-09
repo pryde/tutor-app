@@ -12,4 +12,9 @@ export class StudentsService {
     return this.http.get('/api/students')
       .map(res => res.json());
   }
+
+  createStudent(student: any) {
+    return this.http.post('/api/students', student)
+      .map(res => res.json());
+  }
 }
