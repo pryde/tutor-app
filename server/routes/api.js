@@ -12,16 +12,17 @@ var Student = mongoose.model('Student', {
 });
 
 /* GET api listing. */
-router.get('/api/students', (req, res) => {
+router.get('/students', (req, res) => {
+  console.log('GET Request received for students');
   Student.find((err, students) => {
     if (err)
-      res.send(err);
+      res.status(404).send({ error: 'error in mongo of kalpita!' });
 
     res.json(students);
   });
 });
 
-router.post('/api/students', (req, res) => {
+router.post('/students', (req, res) => {
   Student.create({
     name: req.body.name,
     year: req.body.year,
@@ -34,7 +35,7 @@ router.post('/api/students', (req, res) => {
       if (err)
         res.send(err);
 
-      res.json(Students);
+      res.json(students);
     });
   });
 });

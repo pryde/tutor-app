@@ -9,11 +9,13 @@ export class StudentsService {
 
   // Get all students from the API
   getAllStudents() {
+    console.log('getAllStudents called');
     return this.http.get('/api/students')
       .map(res => res.json());
   }
 
   createStudent(student: any) {
+    console.log('createStudent called');
     return this.http.post('/api/students', student)
       .map(res => res.json());
   }
