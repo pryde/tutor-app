@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build -prod"
+    "postinstall": "ng build -prod",
+    "preinstall": "npm install -g angular-cli"
   },
   "engines": {
     "node": "6.11.4"
