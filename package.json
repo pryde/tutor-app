@@ -12,6 +12,9 @@
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod"
   },
+  "engines": {
+    "node": "6.11.4"
+  },
   "private": true,
   "dependencies": {
     "@angular-devkit/core": "^0.3.1",
