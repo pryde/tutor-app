@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsService } from '../students.service';
+import { Student } from '../student';
 
 @Component({
   selector: 'app-students',
@@ -8,10 +9,18 @@ import { StudentsService } from '../students.service';
 })
 export class StudentsComponent implements OnInit {
   // instantiate students to an empty array
-  students: any = [];
-  student: any = {
-    name: "",
-    year: ""
+  students: Student[];
+  student: Student = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    year: "",
+    bio: "",
+    school: "",
+    major: "",
+    canTutor: [],
+    password: ""
   };
 
   constructor(private studentsService: StudentsService) { }
@@ -29,4 +38,9 @@ export class StudentsComponent implements OnInit {
     });
   }
 
+  deleteStudent(student) {
+    this.studentsService.deleteStudent(student).subscribe(students => {
+      this.students = students;
+    });
+  }
 }

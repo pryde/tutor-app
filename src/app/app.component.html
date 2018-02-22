@@ -1,8 +1,22 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
+
+
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <router-outlet></router-outlet>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
+<nav class="navbar navbar-static-top navbar-inverse bg-primary" style="border-radius:0px;">
+  <a class="navbar-brand" href="/home">TutorApp</a>
+  <ul class = "navbar-nav">
+    <li class = "list-unstyled nav-item">
+      <a class = "nav-link" href = "/home">Home</a>
+    </li>
+    <li class = "list-unstyled nav-item">
+      <a class = "nav-link" href = "/students">Tutors</a>
+    </li>
+    <li class = "list-unstyled nav-item">
+      <a class = "nav-link" href = "/login">Log In/Sign Up</a>
+    </li>
+  </ul>
+</nav>
+
+<br><br>
+
+<router-outlet></router-outlet>

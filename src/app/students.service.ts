@@ -19,4 +19,9 @@ export class StudentsService {
     return this.http.post('/api/students', student)
       .map(res => res.json());
   }
+
+  deleteStudent(student: any) {
+    return this.http.delete('/api/students', student)
+      .map(res => res.json());
+  }
 }

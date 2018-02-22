@@ -1,27 +1,31 @@
+<div class = "container">
+  <form>
+    <div class = "input-group">
+      <input type = "text" class = "form-control" placeholder = "Search Tutors" />
+      <div class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+          Search
+          </button>
+      </div>
+    </div>
+  </form>
+ </div>
+
+ <br><br>
+
 <div class="container">
-  <div class="row" *ngFor="let student of students">
+  <div class="row" *ngFor="let student of students; let i = index">
     <div class="card card-block">
-      <h4 class="card-title">{{ student.name }}</h4>
-      <p class="card-text">{{ student.year }}</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <h4 class="card-title">{{ student.firstName }} {{ student.lastName}}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">{{ student.school }}, {{ student.major}}, {{ student.year }}</h6>
+      <p class="card-text">This will be bio text listing the subjects this student/tutor is willing to tutor, as well as a brief introduction to them.
+      Additional database work is needed to determine exactly what information this will entail, though it is likely to include hours available and preferred
+      rates.</p>
+      <a href="#" class="card-link">View Full Profile</a>
+      <a href="#" class="card-link">Message</a>
+      <!--
+      <button type = "submit" class = "btn btn-primary" (click) = "deleteStudent(this.students[i])">Delete</button>
+    -->
     </div>
   </div>
 </div>
-
-
-<div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" [(ngModel)]="this.student.name" name = "name">
-                        <input type = "text" class = "form-control input-lg text-center" [(ngModel)] = "this.student.year" name = "year">
-                    </div>
-
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-                    <button type="submit" class="btn btn-primary btn-lg" (click)="postStudent(this.student)">Add</button>
-                </form>
-            </div>
-        </div>
