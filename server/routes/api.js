@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 // mongo db connection
-mongoose.connect('mongodb://localhost/tutor-app');
+mongoose.connect('mongodb://heroku_1v97948b:2gfsjs94iu59qf9t8admgeidd1@ds245548.mlab.com:45548/heroku_1v97948b');
 
 // define mongodb model
 var Student = mongoose.model('Student', {
