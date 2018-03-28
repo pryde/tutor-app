@@ -3,11 +3,17 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
+require('./server/models/student');
+require('./server/config/passport');
 
 // Get our API routes
 const api = require('./server/routes/api');
 
 const app = express();
+
+app.use(passport.initialize());
 
 // Parsers for POST data
 app.use(bodyParser.json());

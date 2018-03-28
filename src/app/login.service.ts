@@ -13,6 +13,7 @@ const httpOptions = {
 @Injectable()
 export class LoginService {
   private studentsUrl = 'api/students/signup';  // URL to web api
+  public hasAccount = false;
 
   constructor(
     private http: HttpClient) { }
@@ -37,6 +38,18 @@ export class LoginService {
   createStudent(student: Student) {
     console.log('createStudent called');
     return this.http.post<Student>(this.studentsUrl, student)
+      .map(res => res);
+  }
+
+  checkStudent(email: String, password: String) {
+    console.log('checkStudent called');
+    var body = {
+      email: email,
+      password: password
+    };
+    let bodyString = JSON.stringify(body); // Stringify payload
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})};
+    return this.http.post<Student>('api/students/signin', body)
       .map(res => res);
   }
 

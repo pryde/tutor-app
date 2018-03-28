@@ -18,10 +18,19 @@ export class LoginComponent implements OnInit {
     this.student = new Student();
   }
 
+  hasAccount() {
+    return this.loginService.hasAccount;
+  }
+
+  setAccount() {
+    this.loginService.hasAccount = true;
+  }
+
   signup(student) {
     this.loginService.createStudent(student)
       .subscribe(student => this.student = student);
 
+    this.setAccount();
     this.router.navigateByUrl('/students');
   }
 

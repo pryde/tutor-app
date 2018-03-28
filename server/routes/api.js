@@ -3,20 +3,12 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 // mongo db connection
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost/tutor-app');
 
-// define mongodb model
-var Student = mongoose.model('Student', {
-  firstName: String,
-  lastName: String,
-  email: String,
-  phone: String,
-  bio: String,
-  year: String,
-  school: String,
-  major: String,
-  canTutor: [String],
-  password: String
+var jwt = require('express-jwt');
+var auth = jwt({
+  secret: 'MY_SECRET',
+  userProperty: 'payload'
 });
 
 /* GET api listing. */
@@ -76,8 +68,31 @@ router.post('/students/signup', (req, res) => {
   });
 });
 
+/* POST api listing for signin form
+router.post('/students/signin' (req, res) => {
+  console.log("POST Request received for students/signin");
+  Student.find({
+    email: req.body.email,
+    password: req.body.password
+  }, (err, student) => {
+    if (err)
+      res.send(err);
+
+    res.send(student);
+  });
+}); */
+
 router.delete('/students', (req, res) => {
   return 0;
 })
+
+// error handlers
+// Catch unauthorised errors
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
 
 module.exports = router;
