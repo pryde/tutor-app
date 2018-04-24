@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsService } from '../students.service';
 import { Student } from '../student';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-students',
@@ -9,6 +11,7 @@ import { Student } from '../student';
 })
 export class StudentsComponent implements OnInit {
   // instantiate students to an empty array
+  /*
   students: Student[];
   student: Student = {
     firstName: "",
@@ -22,14 +25,19 @@ export class StudentsComponent implements OnInit {
     canTutor: [],
     password: ""
   };
+  */
+  students: Observable<any[]>;
 
-  constructor(private studentsService: StudentsService) { }
+  constructor(private studentsService: StudentsService, af: AngularFireDatabase) {
+    this.students = af.list<any>('/Students').valueChanges();
+    //console.log(this.students);
+  }
 
   ngOnInit() {
     // retrieve students from the api
-    this.studentsService.getAllStudents().subscribe(students => {
-      this.students = students;
-    });
+    //this.studentsService.getAllStudents().subscribe(students => {
+    //  this.students = students;
+    //});
   }
 
   postStudent(student) {
