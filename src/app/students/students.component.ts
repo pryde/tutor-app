@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentsService } from '../students.service';
-import { Student } from '../student';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
@@ -28,7 +26,7 @@ export class StudentsComponent implements OnInit {
   */
   students: Observable<any[]>;
 
-  constructor(private studentsService: StudentsService, af: AngularFireDatabase) {
+  constructor(private af: AngularFireDatabase) {
     this.students = af.list<any>('/Students').valueChanges();
     //console.log(this.students);
   }
@@ -38,17 +36,5 @@ export class StudentsComponent implements OnInit {
     //this.studentsService.getAllStudents().subscribe(students => {
     //  this.students = students;
     //});
-  }
-
-  postStudent(student) {
-    this.studentsService.createStudent(student).subscribe(students => {
-      this.students = students;
-    });
-  }
-
-  deleteStudent(student) {
-    this.studentsService.deleteStudent(student).subscribe(students => {
-      this.students = students;
-    });
   }
 }

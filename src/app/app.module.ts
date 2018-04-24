@@ -11,10 +11,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
-import { StudentsService } from './students.service';
-import { LoginService } from './login.service';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { firebaseConfig } from '../../environments/firebase.config';
 
 // define routes
@@ -31,10 +28,6 @@ const ROUTES = [
   {
     path: 'home',
     component: HomeComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   }
 ];
 
@@ -42,8 +35,7 @@ const ROUTES = [
   declarations: [
     AppComponent,
     StudentsComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +47,7 @@ const ROUTES = [
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [StudentsService, LoginService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
