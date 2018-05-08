@@ -12,7 +12,10 @@
       <a class = "nav-link" [routerLink] = "['/students']">Tutors</a>
     </li>
     <li class = "list-unstyled nav-item">
-      <a class = "nav-link" [routerLink] = "['/login']">Log In/Sign Up</a>
+      <a class = "nav-link" [routerLink] = "['/login']">Sign Up</a>
+    </li>
+    <li class = "list-unstyled nav-item pull-right" *ngIf="auth.user | async as user">
+      <a class = "nav-link pull-right" [routerLink] = "['/profile']">{{user.firstName}}</a>
     </li>
   </ul>
 </nav>

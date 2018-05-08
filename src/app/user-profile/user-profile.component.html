@@ -17,11 +17,15 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
+
     <div *ngIf="auth.user | async as user">
-        <h3>Howdy, {{ user.displayName }}</h3>
-        <img  [src]="user.photoURL">
-        <p>UID: {{ user.uid }}</p>
-        <p>Favorite Color: {{ user?.favoriteColor }} </p>
-        <button (click)="auth.signOut()">Logout</button>
+        <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+        <img class = "rounded float-right" [src]="user.photoURL" style="width:100px;height:100px;">
+        <p>{{ user.year }} {{ user.major }} major at {{ user.school }} </p>
+        <p> Bio: <br>
+        <textarea name = "bio" [(ngModel)] = "this.bio" rows = "5" cols = "100"></textarea>
+        <button class = "btn btn-primary" (click)="updateBio()">Update Bio</button>
+        </p>
+        <button class = "btn btn-primary" (click)="auth.signOut()">Logout</button>
     </div>
 </ng-template>

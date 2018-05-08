@@ -31,13 +31,17 @@
 </div> -->
 
 <div class = "container">
-  <div class = "row" *ngFor = "let student of students | async">
-    <div class = "card card-block">
-      <h4 class = "card-title">{{ student.name }}</h4>
-      <h6 class="card-subtitle mb-2 text-muted">{{ student.school }}, {{ student.major}}, {{ student.year }}</h6>
-      <p class="card-text">{{ student.bio }}</p>
-      <a href="#" class="card-link">View Full Profile</a>
-      <a href="#" class="card-link">Message</a>
+  <div class = "card-columns">
+    <div *ngFor = "let student of students | async">
+      <div class = "card card-block" *ngIf = "student.isTutor">
+        <div class = "card-body">
+          <h4 class = "card-title">{{ student.firstName }} {{ student.lastName }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{ student.school }}, {{ student.major}}, {{ student.year }}</h6>
+          <p class="card-text">{{ student?.bio }}</p>
+          <a href="#" class="card-link">View Full Profile</a>
+          <a href="#" class="card-link">Message</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

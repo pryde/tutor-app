@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-students',
@@ -26,8 +27,9 @@ export class StudentsComponent implements OnInit {
   */
   students: Observable<any[]>;
 
-  constructor(private af: AngularFireDatabase) {
-    this.students = af.list<any>('/Students').valueChanges();
+  constructor(private db: AngularFirestore) {
+    //this.students = af.list<any>('/Students').valueChanges();
+    this.students = db.collection('users').valueChanges();
     //console.log(this.students);
   }
 

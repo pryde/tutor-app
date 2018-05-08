@@ -13,7 +13,14 @@ interface User {
   email: string;
   photoURL?: string;
   displayName?: string;
+  firstName: string;
+  lastName: string;
+  major: string;
+  year: string;
+  school: string;
+  catchPhrase: string;
   favoriteColor?: string;
+  bio?: string;
 }
 
 
@@ -45,6 +52,14 @@ export class AuthService {
       .catch(error => this.handleError(error) );
   }
 
+  emailSignIn(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+          console.log('Signed in as ' + user.uid)
+      })
+      .catch(error => console.log(error));
+  }
+
   // Update properties on the user document
   updateUser(user: User, data: any) {
     return this.afs.doc(`users/${user.uid}`).update(data)
@@ -55,6 +70,12 @@ export class AuthService {
     console.error(error)
   }
 
+  private getData(user) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+
+  //  const data: User = userRef.getData();
+  }
+
   // Sets user data to firestore after succesful login
   private setUserDoc(user) {
 
@@ -63,7 +84,14 @@ export class AuthService {
     const data: User = {
       uid: user.uid,
       email: user.email || null,
-      photoURL: 'https://goo.gl/Fz9nrQ'
+      photoURL: 'https://goo.gl/Fz9nrQ',
+      catchPhrase: user.catchPhrase || null,
+      firstName: user.firstName || null,
+      lastName: user.lastName || null,
+      major: user.major || null,
+      year: user.year || null,
+      school: user.school || null,
+      bio: user.bio || null
     }
 
     return userRef.set(data)
@@ -92,7 +120,14 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      catchPhrase: user.catchPhrase,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      major: user.major,
+      school: user.school,
+      year: user.year,
+      bio: user.bio || null
     }
 
     return userRef.set(data, { merge: true })

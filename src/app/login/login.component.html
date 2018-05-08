@@ -1,48 +1,117 @@
 <ng-container *ngIf="(auth.user | async) || {} as user">
+  <div class = "container">
+    <div class = "card-deck">
+      <div class = "card card-block" *ngIf="!user.uid">
+          <!--<div class = "card-body">-->
+        <form [formGroup]="signupForm" *ngIf="!user.uid" (ngSubmit)="signup()">
+          <div class = "card-body">
+            <h3 *ngIf = "this.newUser" class = "card-title">New User Signup</h3>
+            <h3 *ngIf = "!this.newUser" class = "card-title">Log In</h3>
+            <div class = "form-group">
+              <label for="email">Email</label>
+              <input class = "form-control" type="email" formControlName="email">
 
-  <form [formGroup]="signupForm" *ngIf="!user.uid" (ngSubmit)="signup()">
 
-    <h3>New User Signup</h3>
+              <div *ngIf="email.invalid && email.dirty && this.newUser">
+                  Your email doesn't look quite right...
+              </div>
+            </div>
+            <div class = "form-group">
+              <label for="password">Password</label>
+              <input class = "form-control" type="password" formControlName="password" required>
 
-    <label for="email">Email</label>
-    <input type="email" formControlName="email">
+              <div *ngIf="password.invalid && password.touched && this.newUser" >
+                Password must be between 6 and 24 chars and have at least one number
+              </div>
 
+              <div *ngIf="signupForm.valid" >Form looks good! Let's do this.</div>
+            </div>
 
-    <div *ngIf="email.invalid && email.dirty">
-        Your email doesn't look quite right...
+            <button class = "btn btn-primary" type="submit" [disabled]="!signupForm.valid">Submit</button><br><br>
+            <a *ngIf = "this.newUser" class = "card-subtitle mb-2 text-muted" (click) = "setNewUser(false)">Already have an account? Log in instead!</a>
+            <a *ngIf = "!this.newUser" class = "card-subtitle mb-2 text-muted" (click) = "setNewUser(true)">Don't have an account? Sign up now!</a>
+          </div>
+        </form>
+      </div>
+
+      <div class = "card card-block text-center" *ngIf="!user.uid">
+        <div class = "card-body">
+          <h3>Or Signup with Google</h3>
+          <button (click)="auth.googleLogin()">
+            <img src = "../assets/btn_google_signin_dark_normal_web@2x.png">
+          </button>
+      </div>
+      </div>
     </div>
 
-    <label for="password">Password</label>
-    <input type="password" formControlName="password" required>
+    <div class = "card card-block" *ngIf="user.uid && !user.catchPhrase">
+      <form [formGroup]="detailForm" *ngIf="user.uid && !user.catchPhrase" (ngSubmit)="setCatchPhrase(user)">
+        <div class = "card-body">
+          <h3>Set your Catch Phrase</h3>
 
-    <div *ngIf="password.invalid && password.touched" >
-      Password must be between 6 and 24 chars and have at least one number
+          <div class = "form-group">
+            <label for="catchPhrase">CatchPhrase</label>
+            <input class = "form-control" type="test" formControlName="catchPhrase">
+          </div>
+
+          <button class = "btn btn-primary" type="submit" [disabled]="!detailForm.valid">Submit</button>
+        </div>
+
+      </form>
     </div>
 
-    <div *ngIf="signupForm.valid" >Form looks good! Let's do this.</div>
+    <div class = "card card-block" *ngIf="user.uid && user.catchPhrase && !isComplete(user)">
+      <form [formGroup]="userInfoForm" *ngIf="user.uid && user.catchPhrase && !isComplete(user)" (ngSubmit)="setUserInfo(user)">
+        <div class = "card-body">
+          <h3>Almost done!</h3>
 
-    <button type="submit" [disabled]="!signupForm.valid">Submit</button>
+          <div class = "form-group col-sm-6">
+            <label for = "firstName">First Name</label>
+            <input class = "form-control" type = "test" formControlName="firstName">
+          </div>
 
+          <div class = "form-group col-sm-6">
+            <label for = "lastName">Last Name</label>
+            <input class = "form-control" type = "test" formControlName = "lastName">
+          </div>
 
-  </form>
+          <div class = "form-group col-sm-4">
+            <label for = "school">School</label>
+            <input class = "form-control" type = "test" formControlName = "school">
+          </div>
 
+          <div class = "form-group col-sm-4">
+            <label for = "major">Major</label>
+            <input class = "form-control" type = "test" formControlName = "major">
+          </div>
 
+          <div class = "form-group col-sm-4">
+            <label for = "year">Year</label>
+            <select class = "form-control" formControlName = "year">
+              <option value="" selected disabled hidden>Choose here</option>
+              <option value = "Freshman">Freshman</option>
+              <option value = "Sophomore">Sophomore</option>
+              <option value = "Junior">Junior</option>
+              <option value = "Senior">Senior</option>
+            </select>
+          </div>
 
-  <form [formGroup]="detailForm" *ngIf="user.uid && !user.catchPhrase" (ngSubmit)="setCatchPhrase(user)">
+          <div class="form-check form-check-inline col-sm-12">
+            <input class="form-check-input" type="checkbox" value="" id="isTutor">
+            <label class="form-check-label" for="isTutor">
+              I am signing up to become a tutor. (This option can be changed at any time
+              in your user profile. Signing up as a tutor allows other students to view
+              your profile and send you messages.)
+            </label>
+          </div>
 
-    <h3>Set your Catch Phrase</h3>
-
-    <label for="catchPhrase">CatchPhrase</label>
-    <input type="test" formControlName="catchPhrase">
-
-
-    <button type="submit" [disabled]="!detailForm.valid">Submit</button>
-
-
-  </form>
-
-  <p *ngIf="user.catchPhrase">
-      You have completed the form!
-  </p>
+          <button class = "btn btn-primary" type="submit" [disabled]="!userInfoForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+    <p *ngIf="isComplete(user)">
+        You're all set!
+    </p>
+  </div>
 
 </ng-container>
