@@ -85,11 +85,11 @@ export class LoginComponent implements OnInit {
 
   // Step 3
   setUserInfo(user) {
-  const isTutorBox: HTMLInputElement = document.getElementById('isTutor')
-  console.log(isTutorBox.checked)
-  return this.auth.updateUser(user, { firstName: this.firstName.value,
-    lastName: this.lastName.value, school: this.school.value,
-    major: this.major.value, year: this.year.value, isTutor: isTutorBox.checked })
+    const isTutorBox: HTMLInputElement = <HTMLInputElement>document.getElementById('isTutor')
+    console.log(isTutorBox.checked)
+    return this.auth.updateUser(user, { firstName: this.firstName.value,
+      lastName: this.lastName.value, school: this.school.value,
+      major: this.major.value, year: this.year.value, isTutor: isTutorBox.checked })
   }
 
   // Confirm Completion

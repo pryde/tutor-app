@@ -20,7 +20,7 @@ interface User {
   school: string;
   catchPhrase: string;
   favoriteColor?: string;
-  bio?: string;
+  bio: string;
 }
 
 
@@ -91,7 +91,7 @@ export class AuthService {
       major: user.major || null,
       year: user.year || null,
       school: user.school || null,
-      bio: user.bio || null
+      bio: user.bio || "Tell us a little about yourself, including which courses you are willing to tutor"
     }
 
     return userRef.set(data)
@@ -127,7 +127,7 @@ export class AuthService {
       major: user.major,
       school: user.school,
       year: user.year,
-      bio: user.bio || null
+      bio: user.bio || "Tell us a little about yourself, including which courses you are willing to tutor"
     }
 
     return userRef.set(data, { merge: true })

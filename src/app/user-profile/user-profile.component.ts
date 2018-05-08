@@ -9,12 +9,15 @@ import { AuthService } from '../auth.service';
 export class UserProfileComponent {
   editing = true;
   bio: string;
-  user: any;
 
   constructor(public auth: AuthService) { }
 
-  updateBio() {
-    this.auth.user.subscribe(user => this.user = user,
-    () => this.auth.updateUser(this.user, {bio: this.bio}); console.log('Updated bio to: ' + this.bio + ' on user: ' + this.user.uid));
+  updateProfile(user) {
+    const isTutorBox: HTMLInputElement = <HTMLInputElement>document.getElementById('isTutor')
+    const isTutor = isTutorBox.checked
+    //console.log('Update bio: ' + this.bio);
+    this.auth.updateUser(user, {year: user.year, major: user.major,
+      school: user.school, bio: user.bio, isTutor: isTutor});
+
   }
 }
