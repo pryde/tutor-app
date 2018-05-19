@@ -1,5 +1,7 @@
 # TutorApp
 
+Additional documentation for this project may be found at the repo wiki. For access to the live version, go to
+[https://tutor-app-35430.firebaseapp.com/](https://tutor-app-35430.firebaseapp.com/students)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
 
 ## Development server
