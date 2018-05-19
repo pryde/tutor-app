@@ -40,10 +40,14 @@ export class StudentsComponent implements OnInit {
 
   onKey(event: any) {
     this.searchString = event.target.value;
-    console.log('Search String: ' + this.searchString)
     this.students = this.students.map(students => students.filter(student =>
-      student.firstName.toLowerCase().includes(this.searchString.toLowerCase())
-      || student.lastName.toLowerCase().includes(this.searchString.toLowerCase())));
+      (student.firstName != null && student.firstName.toLowerCase().includes(this.searchString.toLowerCase()))
+      || (student.lastName != null && student.lastName.toLowerCase().includes(this.searchString.toLowerCase()))
+      || (student.bio != null && student.bio.toLowerCase().includes(this.searchString.toLowerCase()))
+      || (student.school != null && student.school.toLowerCase().includes(this.searchString.toLowerCase()))
+      || (student.major != null && student.major.toLowerCase().includes(this.searchString.toLowerCase()))
+      || (student.year != null && student.year.toLowerCase().includes(this.searchString.toLowerCase()))
+      && student.isTutor));
     console.log(this.students);
   }
 
